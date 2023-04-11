@@ -1,0 +1,114 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+input {
+  line-height: normal;
+}
+
+label,
+button {
+  cursor: pointer;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.quiz {
+  max-height: 31rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  padding: 2rem;
+  border: 2px solid black;
+  text-align: left;
+  max-width: 38rem;
+  width: 100%;
+}
+
+.content .question {
+  margin-bottom: 2rem;
+}
+
+.content .answers label {
+  display: block;
+}
+
+.content .answers label + label {
+  margin-top: 1rem;
+}
+
+.controls {
+  max-width: 38rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls .next-btn {
+  margin-left: auto;
+}
+
+.score {
+  margin-top: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  background-color: white;
+  border: 2px solid black;
+}
