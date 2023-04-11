@@ -83,7 +83,6 @@ const myQuestions = [
 ];
 
 let currentQuestion = 0;
-let score = 0;
 
 const userAnswers = [];
 const correctAnswers = myQuestions.map((question) => question.correctAnswer);
@@ -103,18 +102,27 @@ function showQuestion() {
   keys.forEach((key, index) => {
     answerArea.innerHTML += `
     <label for="answer-${index + 1}" class="answer-${index + 1}">
-      <input type="radio" name="answer" id="answer-${index + 1}" />
+      <input type=${
+        myQuestions[currentQuestion].multi ? "checkbox" : "radio"
+      } name="answer" id="answer-${index + 1}" />
       <span>${key}. ${myQuestions[currentQuestion].answers[key]}</span>
     </label>
     `;
   });
 
   const answerInputs = $$(".answers label input");
+  userAnswers[currentQuestion] = userAnswers[currentQuestion] || [];
   answerInputs.forEach((answerInput, index) => {
-    answerInput.checked = userAnswers[currentQuestion] === keys[index];
     answerInput.addEventListener("click", () => {
-      userAnswers[currentQuestion] = keys[index];
+      answerInputs.forEach((answerInput, index) => {
+        if (answerInput.checked) {
+          userAnswers[currentQuestion][index] = keys[index];
+        } else {
+          delete userAnswers[currentQuestion][index];
+        }
+      });
     });
+    answerInput.checked = userAnswers[currentQuestion][index] === keys[index];
   });
 }
 
@@ -144,9 +152,13 @@ function prevQuestion() {
 }
 
 function displayScore() {
-  score = 0;
+  let score = 0;
   correctAnswers.forEach((correctAnswer, index) => {
-    if (correctAnswer === userAnswers[index]) score++;
+    let correctAnswerString = correctAnswer.toString();
+    let userAnswersString = userAnswers[index]
+      .filter((value) => value)
+      .toString();
+    if (correctAnswerString === userAnswersString) score++;
   });
   scoreText.classList.remove("hidden");
   scoreText.textContent = `${score} out of ${correctAnswers.length}`;
