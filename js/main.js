@@ -117,11 +117,9 @@ function showQuestion() {
     // Add checked inputs to an array whenever an input is clicked
     answerInput.addEventListener("click", () => {
       answerInputs.forEach((answerInput, index) => {
-        if (answerInput.checked) {
-          userAnswers[currentQuestion][index] = keys[index];
-        } else {
-          delete userAnswers[currentQuestion][index];
-        }
+        userAnswers[currentQuestion][index] = answerInput.checked
+          ? keys[index]
+          : null;
       });
     });
     // Load checked inputs from the array
