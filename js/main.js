@@ -88,6 +88,7 @@ const userAnswers = [];
 const correctAnswers = myQuestions.map((question) => question.correctAnswer);
 
 function showQuestion() {
+  // Add HTML to quiz area
   quizArea.innerHTML = `
   <div class="content">
     <h3 class="question">Question ${currentQuestion + 1}: ${
@@ -96,7 +97,7 @@ function showQuestion() {
     <div class="answers"></div>
   </div>
   `;
-
+  // Add HTML to answer area
   const answerArea = $(".answers");
   const keys = Object.keys(myQuestions[currentQuestion].answers);
   keys.forEach((key, index) => {
@@ -109,10 +110,11 @@ function showQuestion() {
     </label>
     `;
   });
-
+  // Two way binding checked inputs and interface
   const answerInputs = $$(".answers label input");
   userAnswers[currentQuestion] = userAnswers[currentQuestion] || [];
   answerInputs.forEach((answerInput, index) => {
+    // Add checked inputs to an array whenever an input is clicked
     answerInput.addEventListener("click", () => {
       answerInputs.forEach((answerInput, index) => {
         if (answerInput.checked) {
@@ -122,6 +124,7 @@ function showQuestion() {
         }
       });
     });
+    // Load checked inputs from the array
     answerInput.checked = userAnswers[currentQuestion][index] === keys[index];
   });
 }
